@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User_Authentication extends CI_Controller {
+class Users extends CI_Controller {
     function __construct() {
         parent::__construct();
         
@@ -43,22 +43,8 @@ class User_Authentication extends CI_Controller {
             
             // Get logout URL
             $data['logoutURL'] = $this->facebook->logout_url();
-        }else{
-            // Get login URL
-            $data['authURL'] =  $this->facebook->login_url();
-        }
-        
-        // Load login & profile view
-        $this->load->view('user_authentication/index',$data);
-    }
 
-    public function google(){
-        // Redirect to profile page if the user already logged in
-        if($this->session->userdata('loggedIn') == true){
-            redirect('user_authentication/profile/');
-        }
-        
-        if(isset($_GET['code'])){
+        }else if(isset($_GET['code'])){
             
             // Authenticate user with google
             if($this->google->getAuthenticate()){
@@ -74,30 +60,28 @@ class User_Authentication extends CI_Controller {
                         'sess_logged_in'=>1
                         );
                 $this->session->set_userdata($session_data);
-                
-                // Redirect to profile page
-                redirect('user_authentication/profile/');
             }
-        } 
+        }else{
+            // Get login URL
+            $data['fb_url'] =  $this->facebook->login_url();
+            $data['ga_url'] = $this->google->loginURL();
+        }
         
-        // Google authentication url
-        $data['loginURL'] = $this->google->loginURL();
-        
-        // Load google login view
-        $this->load->view('user_authentication/index',$data);
+        // Load login & profile view
+        $this->load->view('users/profile',$data);
     }
-    
+
     public function profile(){
         // Redirect to login page if the user not logged in
-        if(!$this->session->userdata('loggedIn')){
-            redirect('/user_authentication/');
+        if(!$this->session->userdata('user_id')){
+            redirect('/users/');
         }
         
         // Get user info from session
         $data['userData'] = $this->session->userdata('userData');
         
         // Load user profile view
-        $this->load->view('user_authentication/profile',$data);
+        $this->load->view('users/profile',$data);
     }
     
     public function logout(){
@@ -116,6 +100,6 @@ class User_Authentication extends CI_Controller {
         $this->session->sess_destroy();
         
         // Redirect to login page
-        redirect('/user_authentication/');
+        redirect('/users/');
     }
 }

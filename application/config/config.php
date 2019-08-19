@@ -380,7 +380,7 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = 'ci_sessions';
+$config['sess_save_path'] = 'um_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -522,19 +522,20 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-//customized configuration for social login
+//customized configuration for facebook
 $config['facebook_app_id']                = '1280354818805875';
 $config['facebook_app_secret']            = '71981eefe02e2bba73a2533a135bbe4d';
-$config['facebook_login_redirect_url']    = 'http://localhost/user_management/index.php/user_authentication/facebook';
-$config['facebook_logout_redirect_url']   = 'http://localhost/user_management/index.php/user_authentication/logout';
+$config['facebook_login_redirect_url']    = 'http://localhost/codeigniter-social-login/index.php/users/facebook';
+$config['facebook_logout_redirect_url']   = 'http://localhost/codeigniter-social-login/index.php/users/logout';
 $config['facebook_login_type']            = 'web';
 $config['facebook_permissions']           = array('email');
 $config['facebook_graph_version']         = 'v4.0';
 $config['facebook_auth_on_load']          = TRUE;
 
+//customized configuration for google
 $config['google']['client_id']        = '815862905200-cnucoocbpv0mkk4uei24kqpitgrthh2n.apps.googleusercontent.com';
 $config['google']['client_secret']    = 'alF0hIbVMWTwGfW1r5QJz10u';
-$config['google']['redirect_uri']     = 'http://localhost/user_management/index.php/user_authentication/google';
-$config['google']['application_name'] = 'Login to Localhost';
+$config['google']['redirect_uri']     = 'http://localhost/codeigniter-social-login/index.php/users/google';
+$config['google']['application_name'] = 'Login with Google';
 $config['google']['api_key']          = '';
 $config['google']['scopes']           = array();
