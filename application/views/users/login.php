@@ -30,19 +30,21 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="../../index2.html"><b>Login</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="<?php echo base_url().'index.php/users/login' ?>" method="post">
+<?php    echo form_open('users/login', ['id' => 'login']); ?>
+
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <!-- <input type="email" class="form-control" placeholder="Email"> -->
+        <?php echo form_input(['name' => 'identity', 'class' => 'form-control']); ?>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <?php echo form_input(['type' => 'password', 'name' => 'password', 'class' => 'form-control']); ?>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -55,11 +57,12 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <?php echo form_submit('submit', 'Sign In', "class='btn btn-primary btn-block btn-flat'"); ?>
+          <!-- <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button> -->
         </div>
         <!-- /.col -->
       </div>
-    </form>
+    <?php echo form_close(); ?>
 
     <div class="social-auth-links text-center">
       <p>- OR -</p>
