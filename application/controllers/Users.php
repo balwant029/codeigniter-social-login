@@ -14,8 +14,8 @@ class Users extends CI_Controller {
         //Load user model
         $this->load->model('user');
     }
-    
-    public function facebook(){
+
+    public function login(){
         $userData = array();
         
         // Check if user is logged in
@@ -62,25 +62,25 @@ class Users extends CI_Controller {
                 $this->session->set_userdata($session_data);
             }
         }else{
-            // Get login URL
-            $data['fb_url'] =  $this->facebook->login_url();
-            $data['ga_url'] = $this->google->loginURL();
+            //use username and password here
         }
+
+        // Get login URL
+        $data['fb_url'] =  $this->facebook->login_url();
+        $data['ga_url'] = $this->google->loginURL();
+
+        $this->load->view('users/login',$data);
+    }
+    
+    public function profile(){
+        $userData = array();
+        
+        //get 
+
+        $data['fb_url'] =  $this->facebook->login_url();
+        $data['ga_url'] = $this->google->loginURL();
         
         // Load login & profile view
-        $this->load->view('users/profile',$data);
-    }
-
-    public function profile(){
-        // Redirect to login page if the user not logged in
-        if(!$this->session->userdata('user_id')){
-            redirect('/users/');
-        }
-        
-        // Get user info from session
-        $data['userData'] = $this->session->userdata('userData');
-        
-        // Load user profile view
         $this->load->view('users/profile',$data);
     }
     
